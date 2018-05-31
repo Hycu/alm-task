@@ -13,7 +13,7 @@ var productRoutes  = require("./routes/products"),
     authRoutes     = require("./routes/auth"),
     seed           = require("./seeds");
 
-mongoose.connect("mongodb://localhost/alm_task");
+mongoose.connect("mongodb://localhost/myshop");
 seed.seedDB();
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");

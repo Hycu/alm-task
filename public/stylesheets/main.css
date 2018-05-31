@@ -36,3 +36,12 @@
   background: none;
   border: none;
 }
+
+.div-comm {
+    width: 30%;
+    margin: 25px auto;
+}
+
+.h1-comm {
+    text-align: center;
+}

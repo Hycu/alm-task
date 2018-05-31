@@ -18,7 +18,7 @@ router.post("/register", function(req, res){
             return res.render("register", {error: err.message + "."});
         }
         passport.authenticate("local")(req, res, function(){
-            req.flash("success", "Welcome to MyshOp " + user.username);
+            req.flash("success", "Welcome to MyShop " + user.username + ".");
             res.redirect("/products");
         });
     });
@@ -28,10 +28,19 @@ router.get("/login", function(req, res){
     res.render("login", {page: "login"});
 });
 
-router.post("/login", passport.authenticate("local", {
-    successRedirect: "/products",
-    failureRedirect: "/login"
-}), function(req, res){
+router.post("/login", function(req, res){
+    passport.authenticate("local", function (err, user){
+        if(!err && user){
+            req.flash("success", "Welcome back " + user.username + ".");
+            passport.authenticate("local", {
+                successRedirect: "/products"
+            })(req, res, function(){
+            });
+        } else {
+            req.flash("error", "Incorrect username or password.");
+            res.redirect("/login");
+        }
+    })(req, res);
 });
 
 router.get("/logout", function(req, res){

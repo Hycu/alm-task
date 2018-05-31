@@ -101,8 +101,8 @@ router.get("/new", middleware.isLoggedIn, function(req, res){
 router.get("/:id", function(req, res){
     Product.findById(req.params.id).populate("comments").exec(function(err, foundProduct){
         if (err || !foundProduct){
-            req.flash("error", "Product not found");
-            res.redirect("back");
+            req.flash("error", "Product not found.");
+            res.redirect("/products");
         } else {
             res.render("products/show", {prod: foundProduct});
         }

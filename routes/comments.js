@@ -41,7 +41,7 @@ router.get("/:comment_id/edit", middleware.checkCommentOwner, function(req, res)
     Product.findById(req.params.id, function(err, foundProduct){
         if(err || !foundProduct){
             req.flash("error", "Product not found.");
-            return res.redirect("back");
+            return res.redirect("/products");
         }
         Comment.findById(req.params.comment_id, function(err, foundComment){
             if(err){
