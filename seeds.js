@@ -9,7 +9,8 @@ var Comment = require("./models/comment");
 
 module.exports = {
         seedDB: function(){
-        mongoose.connect("mongodb://localhost/myshop");
+        var url = process.env.DATABASEURL || "mongodb://localhost/myshop";
+        mongoose.connect(url);
         mongoose.connection.collections["products"].drop();
         mongoose.connection.collections["users"].drop();
         mongoose.connection.collections["comments"].drop();
