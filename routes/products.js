@@ -79,11 +79,17 @@ router.post("/", middleware.isLoggedIn, function(req, res){
         name: req.body.name,
         price: req.body.price,
         image: req.body.image, 
-        description: req.body.desc,
+        description: req.body.description,
         author: {
             id: req.user.id,
             username: req.user.username
-        }
+        },
+        infos: [
+            req.body.material,
+            req.body.adjective,
+            req.body.color
+            ],
+        category: req.body.category
     };
     Product.create(newProduct, function(err, product){
         if(err){
