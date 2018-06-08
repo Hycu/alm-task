@@ -3,14 +3,13 @@ var Product = require("./models/product");
 var faker = require('faker');
 var User = require("./models/user");
 var Comment = require("./models/comment");
-
+var config = require("./config");
 
 
 
 module.exports = {
         seedDB: function(){
-        var url = process.env.DATABASEURL || "mongodb://localhost/myshop";
-        mongoose.connect(url);
+        mongoose.connect(config.url);
         mongoose.connection.collections["products"].drop();
         mongoose.connection.collections["users"].drop();
         mongoose.connection.collections["comments"].drop();

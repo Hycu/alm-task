@@ -11,11 +11,10 @@ var methodOverride = require("method-override"),
 var productRoutes  = require("./routes/products"),
     commentRoutes  = require("./routes/comments"),
     authRoutes     = require("./routes/auth"),
-    seed           = require("./seeds");
+    seed           = require("./seeds"),
+    config         = require("./config");
 
-
-var url = process.env.DATABASEURL || "mongodb://localhost/myshop";
-mongoose.connect(url);
+mongoose.connect(config.url);
 seed.seedDB();
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
@@ -45,6 +44,6 @@ app.use("/products", productRoutes);
 app.use("/products/:id/comments", commentRoutes);
 app.use(authRoutes);
 
-app.listen(process.env.PORT, process.env.IP, function(){
-    console.log("App started.");
+app.listen(config.port, config.ip, function(){
+    console.log("App started. On " + config.ip + ":" + config.port);
 });
